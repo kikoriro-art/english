@@ -1,0 +1,1125 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Rainbow Kids English – 子ども英会話教室</title>
+<link href="https://fonts.googleapis.com/css2?family=Fredoka+One&family=Nunito:wght@400;600;700;800&family=M+PLUS+Rounded+1c:wght@400;700;800&display=swap" rel="stylesheet">
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  :root {
+    --sky: #00B4D8;
+    --sky-dark: #0096C7;
+    --yellow: #FFD60A;
+    --yellow-dark: #F4C300;
+    --coral: #FF6B6B;
+    --coral-dark: #E05555;
+    --green: #06D6A0;
+    --green-dark: #04C492;
+    --purple: #845EC2;
+    --navy: #1B2A4A;
+    --white: #FFFFFF;
+    --bg: #F0FAFF;
+    --text: #1B2A4A;
+    --text-muted: #5A7080;
+    --radius: 24px;
+    --radius-lg: 40px;
+  }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    font-family: 'Nunito', 'M PLUS Rounded 1c', sans-serif;
+    background: var(--bg);
+    color: var(--text);
+    line-height: 1.6;
+    overflow-x: hidden;
+  }
+
+  /* ====== BUBBLES BG ====== */
+  .bubbles-bg {
+    position: absolute;
+    inset: 0;
+    pointer-events: none;
+    overflow: hidden;
+  }
+  .bubble {
+    position: absolute;
+    border-radius: 50%;
+    opacity: 0.18;
+    animation: floatBubble linear infinite;
+  }
+
+  @keyframes floatBubble {
+    0%   { transform: translateY(0) scale(1); }
+    50%  { transform: translateY(-30px) scale(1.05); }
+    100% { transform: translateY(0) scale(1); }
+  }
+
+  /* ====== NAV ====== */
+  nav {
+    position: fixed;
+    top: 0; left: 0; right: 0;
+    z-index: 100;
+    background: rgba(240, 250, 255, 0.92);
+    backdrop-filter: blur(12px);
+    border-bottom: 2px solid rgba(0, 180, 216, 0.15);
+    padding: 0 2rem;
+    height: 72px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+  .nav-logo {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    font-family: 'Fredoka One', cursive;
+    font-size: 1.5rem;
+    color: var(--sky-dark);
+    text-decoration: none;
+  }
+  .nav-logo .logo-icon {
+    width: 42px;
+    height: 42px;
+    background: var(--yellow);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.4rem;
+  }
+  .nav-links {
+    display: flex;
+    gap: 2rem;
+    list-style: none;
+  }
+  .nav-links a {
+    text-decoration: none;
+    color: var(--text);
+    font-weight: 700;
+    font-size: 0.95rem;
+    transition: color 0.2s;
+  }
+  .nav-links a:hover { color: var(--sky); }
+  .nav-cta {
+    background: var(--coral);
+    color: white;
+    padding: 10px 22px;
+    border-radius: 50px;
+    font-weight: 800;
+    text-decoration: none;
+    font-size: 0.9rem;
+    transition: transform 0.2s, background 0.2s;
+    display: inline-block;
+    box-shadow: 0 4px 0 var(--coral-dark);
+  }
+  .nav-cta:hover { transform: translateY(-2px); background: var(--coral-dark); }
+
+  /* ====== HERO ====== */
+  .hero {
+    position: relative;
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    padding: 100px 2rem 4rem;
+    overflow: hidden;
+    background: linear-gradient(160deg, #E0F7FF 0%, #F0FAFF 50%, #FFF9E0 100%);
+  }
+  .hero-inner {
+    max-width: 1200px;
+    margin: 0 auto;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 3rem;
+    align-items: center;
+    width: 100%;
+  }
+  .hero-badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    background: var(--yellow);
+    color: var(--navy);
+    padding: 6px 18px;
+    border-radius: 50px;
+    font-weight: 800;
+    font-size: 0.85rem;
+    margin-bottom: 1.2rem;
+    animation: bounceIn 0.6s cubic-bezier(0.34,1.56,0.64,1) both;
+  }
+  .hero h1 {
+    font-family: 'Fredoka One', cursive;
+    font-size: clamp(2.4rem, 5vw, 3.8rem);
+    line-height: 1.15;
+    margin-bottom: 1.2rem;
+    animation: slideUp 0.7s cubic-bezier(0.34,1.36,0.64,1) 0.1s both;
+  }
+  .hero h1 .accent-sky  { color: var(--sky); }
+  .hero h1 .accent-coral { color: var(--coral); }
+  .hero-desc {
+    font-size: 1.1rem;
+    color: var(--text-muted);
+    margin-bottom: 2rem;
+    max-width: 480px;
+    animation: slideUp 0.7s cubic-bezier(0.34,1.36,0.64,1) 0.2s both;
+  }
+  .hero-btns {
+    display: flex;
+    gap: 1rem;
+    flex-wrap: wrap;
+    animation: slideUp 0.7s cubic-bezier(0.34,1.36,0.64,1) 0.3s both;
+  }
+  .btn-primary {
+    background: var(--sky);
+    color: white;
+    padding: 16px 32px;
+    border-radius: 50px;
+    font-weight: 800;
+    font-size: 1.05rem;
+    text-decoration: none;
+    box-shadow: 0 5px 0 var(--sky-dark);
+    transition: transform 0.2s, box-shadow 0.2s;
+    display: inline-block;
+  }
+  .btn-primary:hover { transform: translateY(-3px); box-shadow: 0 8px 0 var(--sky-dark); }
+  .btn-primary:active { transform: translateY(0); box-shadow: 0 2px 0 var(--sky-dark); }
+  .btn-secondary {
+    background: white;
+    color: var(--sky-dark);
+    padding: 16px 28px;
+    border-radius: 50px;
+    font-weight: 800;
+    font-size: 1.05rem;
+    text-decoration: none;
+    border: 2px solid var(--sky);
+    transition: transform 0.2s, background 0.2s;
+    display: inline-block;
+  }
+  .btn-secondary:hover { transform: translateY(-3px); background: #E0F7FF; }
+
+  /* Hero illustration */
+  .hero-visual {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    animation: floatVisual 4s ease-in-out infinite;
+  }
+  @keyframes floatVisual {
+    0%,100% { transform: translateY(0); }
+    50%      { transform: translateY(-16px); }
+  }
+  .hero-card-stack {
+    position: relative;
+    width: 340px;
+    height: 340px;
+  }
+  .card-bg {
+    position: absolute;
+    border-radius: 32px;
+  }
+  .card-main {
+    position: absolute;
+    inset: 30px 0 0 30px;
+    background: white;
+    border-radius: 32px;
+    box-shadow: 0 20px 60px rgba(0,180,216,0.2);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 12px;
+    padding: 2rem;
+  }
+  .big-emoji { font-size: 5rem; line-height: 1; animation: wobble 2.5s ease-in-out infinite; }
+  @keyframes wobble {
+    0%,100% { transform: rotate(-5deg); }
+    50%      { transform: rotate(5deg); }
+  }
+  .flag-row { display: flex; gap: 8px; font-size: 2rem; }
+  .speech-bubble {
+    background: var(--sky);
+    color: white;
+    padding: 8px 18px;
+    border-radius: 50px;
+    font-weight: 800;
+    font-size: 1.1rem;
+    font-family: 'Fredoka One', cursive;
+    position: relative;
+    animation: pulse 2s ease-in-out infinite;
+  }
+  @keyframes pulse { 0%,100% { transform: scale(1); } 50% { transform: scale(1.05); } }
+  .speech-bubble::after {
+    content: '';
+    position: absolute;
+    bottom: -10px; left: 50%;
+    transform: translateX(-50%);
+    border: 10px solid transparent;
+    border-top-color: var(--sky);
+    border-bottom: none;
+  }
+  .stars-row { display: flex; gap: 4px; font-size: 1.3rem; }
+
+  /* Floating badges around hero */
+  .float-badge {
+    position: absolute;
+    background: white;
+    border-radius: 20px;
+    padding: 10px 16px;
+    font-weight: 800;
+    font-size: 0.85rem;
+    box-shadow: 0 8px 24px rgba(0,0,0,0.1);
+    animation: floatBadge 3s ease-in-out infinite;
+  }
+  .float-badge:nth-child(1) { top: 10px; left: 0; color: var(--coral); border: 2px solid #FFE0E0; animation-delay: 0s; }
+  .float-badge:nth-child(2) { bottom: 60px; left: -20px; color: var(--green-dark); border: 2px solid #D0FFF5; animation-delay: 0.8s; }
+  .float-badge:nth-child(3) { top: 60px; right: -10px; color: var(--purple); border: 2px solid #F0E6FF; animation-delay: 1.6s; }
+  @keyframes floatBadge {
+    0%,100% { transform: translateY(0); }
+    50%      { transform: translateY(-8px); }
+  }
+
+  /* ====== SECTION COMMON ====== */
+  section { padding: 5rem 2rem; }
+  .section-inner { max-width: 1200px; margin: 0 auto; }
+  .section-tag {
+    display: inline-block;
+    background: var(--yellow);
+    color: var(--navy);
+    padding: 4px 16px;
+    border-radius: 50px;
+    font-weight: 800;
+    font-size: 0.8rem;
+    margin-bottom: 0.8rem;
+  }
+  .section-title {
+    font-family: 'Fredoka One', cursive;
+    font-size: clamp(1.8rem, 3.5vw, 2.6rem);
+    line-height: 1.2;
+    margin-bottom: 1rem;
+  }
+  .section-sub {
+    color: var(--text-muted);
+    font-size: 1.05rem;
+    max-width: 560px;
+    margin-bottom: 3rem;
+  }
+
+  /* ====== FEATURES ====== */
+  .features { background: white; }
+  .features-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+    gap: 1.5rem;
+  }
+  .feature-card {
+    background: var(--bg);
+    border-radius: var(--radius);
+    padding: 2rem 1.8rem;
+    transition: transform 0.25s, box-shadow 0.25s;
+    position: relative;
+    overflow: hidden;
+  }
+  .feature-card::before {
+    content: '';
+    position: absolute;
+    top: -30px; right: -30px;
+    width: 90px; height: 90px;
+    border-radius: 50%;
+    opacity: 0.15;
+  }
+  .feature-card.c1::before { background: var(--sky); }
+  .feature-card.c2::before { background: var(--coral); }
+  .feature-card.c3::before { background: var(--green); }
+  .feature-card.c4::before { background: var(--purple); }
+  .feature-card:hover { transform: translateY(-6px); box-shadow: 0 16px 40px rgba(0,0,0,0.1); }
+  .feature-icon {
+    width: 60px; height: 60px;
+    border-radius: 18px;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 1.8rem;
+    margin-bottom: 1.2rem;
+  }
+  .feature-card.c1 .feature-icon { background: #E0F7FF; }
+  .feature-card.c2 .feature-icon { background: #FFE8E8; }
+  .feature-card.c3 .feature-icon { background: #D6FFF5; }
+  .feature-card.c4 .feature-icon { background: #F0E6FF; }
+  .feature-card h3 {
+    font-family: 'Fredoka One', cursive;
+    font-size: 1.2rem;
+    margin-bottom: 0.5rem;
+  }
+  .feature-card p { color: var(--text-muted); font-size: 0.95rem; line-height: 1.6; }
+
+  /* ====== CLASSES ====== */
+  .classes { background: linear-gradient(180deg, #F0FAFF 0%, #FFF9E0 100%); }
+  .classes-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 2rem;
+  }
+  .class-card {
+    background: white;
+    border-radius: var(--radius);
+    overflow: hidden;
+    box-shadow: 0 8px 30px rgba(0,0,0,0.08);
+    transition: transform 0.3s;
+  }
+  .class-card:hover { transform: translateY(-8px); }
+  .class-header {
+    padding: 2rem 2rem 1.5rem;
+    display: flex;
+    align-items: flex-start;
+    gap: 1rem;
+  }
+  .class-emoji { font-size: 2.8rem; }
+  .class-age {
+    display: inline-block;
+    font-size: 0.78rem;
+    font-weight: 800;
+    padding: 3px 12px;
+    border-radius: 50px;
+    margin-bottom: 6px;
+  }
+  .class-card:nth-child(1) .class-header { background: linear-gradient(135deg, #E0F7FF, #F0FAFF); }
+  .class-card:nth-child(2) .class-header { background: linear-gradient(135deg, #FFE8E8, #FFF0F0); }
+  .class-card:nth-child(3) .class-header { background: linear-gradient(135deg, #D6FFF5, #F0FFFB); }
+  .class-card:nth-child(1) .class-age { background: #E0F7FF; color: var(--sky-dark); }
+  .class-card:nth-child(2) .class-age { background: #FFE8E8; color: var(--coral-dark); }
+  .class-card:nth-child(3) .class-age { background: #D6FFF5; color: var(--green-dark); }
+  .class-name { font-family: 'Fredoka One', cursive; font-size: 1.25rem; }
+  .class-body { padding: 1.5rem 2rem 2rem; }
+  .class-body p { color: var(--text-muted); font-size: 0.95rem; margin-bottom: 1.2rem; }
+  .class-features { list-style: none; display: flex; flex-direction: column; gap: 8px; margin-bottom: 1.5rem; }
+  .class-features li {
+    display: flex; align-items: center; gap: 8px;
+    font-size: 0.9rem; font-weight: 600;
+  }
+  .class-features li::before {
+    content: '✓';
+    width: 22px; height: 22px;
+    border-radius: 50%;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 0.75rem;
+    flex-shrink: 0;
+    font-weight: 900;
+  }
+  .class-card:nth-child(1) .class-features li::before { background: #E0F7FF; color: var(--sky-dark); }
+  .class-card:nth-child(2) .class-features li::before { background: #FFE8E8; color: var(--coral-dark); }
+  .class-card:nth-child(3) .class-features li::before { background: #D6FFF5; color: var(--green-dark); }
+  .class-price {
+    display: flex; align-items: baseline; gap: 4px;
+    font-family: 'Fredoka One', cursive;
+  }
+  .price-num { font-size: 2rem; }
+  .class-card:nth-child(1) .price-num { color: var(--sky); }
+  .class-card:nth-child(2) .price-num { color: var(--coral); }
+  .class-card:nth-child(3) .price-num { color: var(--green-dark); }
+  .price-unit { color: var(--text-muted); font-size: 0.9rem; }
+
+  /* ====== TEACHERS ====== */
+  .teachers { background: white; }
+  .teachers-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 2rem;
+  }
+  .teacher-card {
+    text-align: center;
+    padding: 2rem 1.5rem;
+    border-radius: var(--radius);
+    background: var(--bg);
+    transition: transform 0.25s;
+  }
+  .teacher-card:hover { transform: translateY(-6px); }
+  .teacher-avatar {
+    width: 90px; height: 90px;
+    border-radius: 50%;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 3rem;
+    margin: 0 auto 1rem;
+  }
+  .teacher-card:nth-child(1) .teacher-avatar { background: #FFE8E8; }
+  .teacher-card:nth-child(2) .teacher-avatar { background: #E0F7FF; }
+  .teacher-card:nth-child(3) .teacher-avatar { background: #D6FFF5; }
+  .teacher-card:nth-child(4) .teacher-avatar { background: #F0E6FF; }
+  .teacher-name { font-family: 'Fredoka One', cursive; font-size: 1.1rem; margin-bottom: 4px; }
+  .teacher-origin {
+    font-size: 0.82rem; font-weight: 700;
+    padding: 3px 12px;
+    border-radius: 50px;
+    display: inline-block;
+    margin-bottom: 0.8rem;
+  }
+  .teacher-card:nth-child(1) .teacher-origin { background: #FFE8E8; color: var(--coral-dark); }
+  .teacher-card:nth-child(2) .teacher-origin { background: #E0F7FF; color: var(--sky-dark); }
+  .teacher-card:nth-child(3) .teacher-origin { background: #D6FFF5; color: var(--green-dark); }
+  .teacher-card:nth-child(4) .teacher-origin { background: #F0E6FF; color: var(--purple); }
+  .teacher-card p { color: var(--text-muted); font-size: 0.88rem; line-height: 1.5; }
+
+  /* ====== TESTIMONIALS ====== */
+  .testimonials { background: linear-gradient(135deg, #1B2A4A 0%, #00496B 100%); color: white; overflow: hidden; position: relative; }
+  .testimonials .section-tag { background: rgba(255,214,10,0.25); color: var(--yellow); }
+  .testimonials .section-title { color: white; }
+  .testimonials .section-sub { color: rgba(255,255,255,0.7); }
+  .testimonials-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 1.5rem;
+  }
+  .testi-card {
+    background: rgba(255,255,255,0.08);
+    border: 1px solid rgba(255,255,255,0.15);
+    border-radius: var(--radius);
+    padding: 1.8rem;
+    backdrop-filter: blur(8px);
+    transition: transform 0.25s, background 0.25s;
+  }
+  .testi-card:hover { transform: translateY(-4px); background: rgba(255,255,255,0.12); }
+  .testi-stars { color: var(--yellow); font-size: 1rem; margin-bottom: 1rem; letter-spacing: 2px; }
+  .testi-text { color: rgba(255,255,255,0.9); font-size: 0.97rem; line-height: 1.7; margin-bottom: 1.2rem; }
+  .testi-author { display: flex; align-items: center; gap: 12px; }
+  .testi-avatar {
+    width: 44px; height: 44px; border-radius: 50%;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 1.5rem;
+    flex-shrink: 0;
+  }
+  .testi-card:nth-child(1) .testi-avatar { background: rgba(255,107,107,0.25); }
+  .testi-card:nth-child(2) .testi-avatar { background: rgba(0,180,216,0.25); }
+  .testi-card:nth-child(3) .testi-avatar { background: rgba(6,214,160,0.25); }
+  .testi-name { font-weight: 800; font-size: 0.92rem; }
+  .testi-role { color: rgba(255,255,255,0.5); font-size: 0.82rem; }
+
+  /* ====== SCHEDULE ====== */
+  .schedule { background: var(--bg); }
+  .schedule-table-wrap { overflow-x: auto; border-radius: var(--radius); box-shadow: 0 8px 30px rgba(0,0,0,0.08); }
+  table { width: 100%; border-collapse: collapse; background: white; border-radius: var(--radius); overflow: hidden; }
+  thead { background: var(--sky); color: white; }
+  thead th { padding: 1rem 1.5rem; font-family: 'Fredoka One', cursive; font-size: 1rem; font-weight: 400; text-align: center; }
+  tbody tr { border-bottom: 1px solid #EEF5F8; transition: background 0.2s; }
+  tbody tr:hover { background: #F0FAFF; }
+  tbody tr:last-child { border-bottom: none; }
+  tbody td { padding: 1rem 1.5rem; font-size: 0.95rem; text-align: center; }
+  tbody td:first-child { font-weight: 800; text-align: left; }
+  .tag-pill {
+    display: inline-block;
+    padding: 4px 14px;
+    border-radius: 50px;
+    font-size: 0.82rem;
+    font-weight: 700;
+  }
+  .pill-sky    { background: #E0F7FF; color: var(--sky-dark); }
+  .pill-coral  { background: #FFE8E8; color: var(--coral-dark); }
+  .pill-green  { background: #D6FFF5; color: var(--green-dark); }
+  .pill-purple { background: #F0E6FF; color: var(--purple); }
+
+  /* ====== CTA / CONTACT ====== */
+  .cta-section {
+    background: var(--yellow);
+    text-align: center;
+    padding: 5rem 2rem;
+    position: relative;
+    overflow: hidden;
+  }
+  .cta-inner { max-width: 700px; margin: 0 auto; position: relative; z-index: 1; }
+  .cta-section h2 {
+    font-family: 'Fredoka One', cursive;
+    font-size: clamp(2rem, 4vw, 3rem);
+    color: var(--navy);
+    margin-bottom: 1rem;
+  }
+  .cta-section p { color: var(--navy); opacity: 0.75; font-size: 1.05rem; margin-bottom: 2rem; }
+  .cta-form {
+    display: flex;
+    gap: 1rem;
+    justify-content: center;
+    flex-wrap: wrap;
+  }
+  .cta-input {
+    padding: 14px 22px;
+    border-radius: 50px;
+    border: none;
+    font-size: 1rem;
+    font-family: 'Nunito', sans-serif;
+    font-weight: 600;
+    outline: none;
+    min-width: 260px;
+    box-shadow: 0 4px 16px rgba(0,0,0,0.1);
+  }
+  .cta-input:focus { box-shadow: 0 4px 16px rgba(0,180,216,0.3); }
+  .cta-btn {
+    background: var(--coral);
+    color: white;
+    border: none;
+    padding: 14px 30px;
+    border-radius: 50px;
+    font-family: 'Nunito', sans-serif;
+    font-size: 1rem;
+    font-weight: 800;
+    cursor: pointer;
+    box-shadow: 0 5px 0 var(--coral-dark);
+    transition: transform 0.2s, box-shadow 0.2s;
+  }
+  .cta-btn:hover { transform: translateY(-3px); box-shadow: 0 8px 0 var(--coral-dark); }
+  .cta-note { margin-top: 1rem; font-size: 0.85rem; color: var(--navy); opacity: 0.6; }
+
+  /* Deco circles for CTA */
+  .cta-deco {
+    position: absolute;
+    border-radius: 50%;
+    background: rgba(255,255,255,0.3);
+  }
+  .cta-deco:nth-child(1) { width: 200px; height: 200px; top: -60px; left: -60px; }
+  .cta-deco:nth-child(2) { width: 140px; height: 140px; bottom: -40px; right: 10%; }
+  .cta-deco:nth-child(3) { width: 80px; height: 80px; top: 30px; right: 5%; }
+
+  /* ====== INFORMATION ====== */
+  .information { background: white; }
+  .info-list { display: flex; flex-direction: column; gap: 0; border-radius: var(--radius); overflow: hidden; box-shadow: 0 8px 30px rgba(0,0,0,0.07); }
+  .info-item {
+    display: flex;
+    align-items: flex-start;
+    gap: 1.2rem;
+    padding: 1.4rem 2rem;
+    background: white;
+    border-bottom: 1px solid #EEF5F8;
+    transition: background 0.2s;
+    cursor: default;
+  }
+  .info-item:last-child { border-bottom: none; }
+  .info-item:hover { background: var(--bg); }
+  .info-badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 5px;
+    padding: 4px 12px;
+    border-radius: 50px;
+    font-size: 0.75rem;
+    font-weight: 800;
+    white-space: nowrap;
+    flex-shrink: 0;
+    margin-top: 2px;
+  }
+  .badge-season { background: #FFF3CD; color: #9A6700; }
+  .badge-event  { background: #D6FFF5; color: var(--green-dark); }
+  .badge-new    { background: #FFE8E8; color: var(--coral-dark); }
+  .badge-info   { background: #E0F7FF; color: var(--sky-dark); }
+  .badge-close  { background: #F0E6FF; color: var(--purple); }
+  .info-date {
+    font-size: 0.82rem;
+    color: var(--text-muted);
+    font-weight: 700;
+    white-space: nowrap;
+    flex-shrink: 0;
+    margin-top: 4px;
+    min-width: 80px;
+  }
+  .info-body { flex: 1; }
+  .info-title {
+    font-weight: 800;
+    font-size: 0.97rem;
+    margin-bottom: 3px;
+    color: var(--text);
+  }
+  .info-desc {
+    font-size: 0.88rem;
+    color: var(--text-muted);
+    line-height: 1.55;
+  }
+  .info-new-dot {
+    width: 8px; height: 8px;
+    background: var(--coral);
+    border-radius: 50%;
+    flex-shrink: 0;
+    margin-top: 7px;
+    animation: pulse 1.8s ease-in-out infinite;
+  }
+
+  /* ====== FOOTER ====== */
+  footer {
+    background: var(--navy);
+    color: rgba(255,255,255,0.6);
+    padding: 3rem 2rem;
+    text-align: center;
+  }
+  .footer-logo {
+    font-family: 'Fredoka One', cursive;
+    font-size: 1.6rem;
+    color: white;
+    margin-bottom: 0.5rem;
+  }
+  .footer-tagline { margin-bottom: 1.5rem; font-size: 0.9rem; }
+  .footer-links { display: flex; justify-content: center; gap: 2rem; flex-wrap: wrap; margin-bottom: 2rem; }
+  .footer-links a { color: rgba(255,255,255,0.6); text-decoration: none; font-size: 0.9rem; font-weight: 600; transition: color 0.2s; }
+  .footer-links a:hover { color: white; }
+  .footer-copy { font-size: 0.8rem; }
+
+  /* ====== ANIMATIONS ====== */
+  @keyframes bounceIn {
+    0%   { transform: scale(0.5); opacity: 0; }
+    80%  { transform: scale(1.05); }
+    100% { transform: scale(1); opacity: 1; }
+  }
+  @keyframes slideUp {
+    0%   { transform: translateY(30px); opacity: 0; }
+    100% { transform: translateY(0); opacity: 1; }
+  }
+
+  .fade-up {
+    opacity: 0;
+    transform: translateY(30px);
+    transition: opacity 0.6s ease, transform 0.6s ease;
+  }
+  .fade-up.visible { opacity: 1; transform: translateY(0); }
+
+  /* ====== RESPONSIVE ====== */
+  @media (max-width: 768px) {
+    .hero-inner { grid-template-columns: 1fr; text-align: center; }
+    .hero-visual { display: none; }
+    .hero-desc { margin: 0 auto 2rem; }
+    .hero-btns { justify-content: center; }
+    .nav-links { display: none; }
+  }
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <a href="#" class="nav-logo">
+    <div class="logo-icon">🌈</div>
+    Rainbow Kids English
+  </a>
+  <ul class="nav-links">
+    <li><a href="#information">お知らせ</a></li>
+    <li><a href="#features">特徴</a></li>
+    <li><a href="#classes">クラス</a></li>
+    <li><a href="#teachers">先生</a></li>
+    <li><a href="#schedule">スケジュール</a></li>
+    <li><a href="#contact">お問い合わせ</a></li>
+  </ul>
+  <a href="#contact" class="nav-cta">無料体験 申し込む</a>
+</nav>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="bubbles-bg">
+    <div class="bubble" style="width:120px;height:120px;background:#00B4D8;top:10%;left:5%;animation-duration:6s;"></div>
+    <div class="bubble" style="width:80px;height:80px;background:#FFD60A;top:60%;left:80%;animation-duration:8s;animation-delay:2s;"></div>
+    <div class="bubble" style="width:60px;height:60px;background:#FF6B6B;top:30%;right:10%;animation-duration:5s;animation-delay:1s;"></div>
+    <div class="bubble" style="width:100px;height:100px;background:#06D6A0;bottom:15%;left:15%;animation-duration:7s;animation-delay:3s;"></div>
+  </div>
+  <div class="hero-inner">
+    <div class="hero-content">
+      <div class="hero-badge">🎉 入学金 0円キャンペーン実施中！</div>
+      <h1>
+        英語が<span class="accent-sky">大好き</span>になる<br>
+        <span class="accent-coral">楽しい</span>英会話教室
+      </h1>
+      <p class="hero-desc">
+        ネイティブ先生との会話で、子どもが自然に英語を身につける。<br>
+        3歳から楽しく学べるプログラムで、グローバルな未来へ。
+      </p>
+      <div class="hero-btns">
+        <a href="#contact" class="btn-primary">🎁 無料体験レッスン</a>
+        <a href="#classes" class="btn-secondary">クラスを見る →</a>
+      </div>
+    </div>
+    <div class="hero-visual">
+      <div class="hero-card-stack">
+        <div class="float-badge">🇺🇸 Hello!</div>
+        <div class="float-badge">🎉 楽しい！</div>
+        <div class="float-badge">📚 ネイティブ先生</div>
+        <div class="card-bg" style="width:280px;height:280px;background:#FFE8E8;top:0;left:0;border-radius:32px;transform:rotate(-8deg);"></div>
+        <div class="card-bg" style="width:280px;height:280px;background:#E0F7FF;top:10px;left:20px;border-radius:32px;transform:rotate(-3deg);"></div>
+        <div class="card-main">
+          <div class="big-emoji">🧒</div>
+          <div class="flag-row">🇺🇸🇬🇧🇦🇺🇨🇦</div>
+          <div class="speech-bubble">Hello, World!</div>
+          <div class="stars-row">⭐⭐⭐⭐⭐</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- NUMBERS STRIP -->
+<div style="background:var(--sky);color:white;padding:1.5rem 2rem;">
+  <div style="max-width:1000px;margin:0 auto;display:flex;gap:2rem;justify-content:space-around;flex-wrap:wrap;text-align:center;">
+    <div>
+      <div style="font-family:'Fredoka One',cursive;font-size:2.2rem;">500+</div>
+      <div style="font-size:0.85rem;opacity:0.85;font-weight:600;">在籍生徒数</div>
+    </div>
+    <div>
+      <div style="font-family:'Fredoka One',cursive;font-size:2.2rem;">8</div>
+      <div style="font-size:0.85rem;opacity:0.85;font-weight:600;">ネイティブ講師</div>
+    </div>
+    <div>
+      <div style="font-family:'Fredoka One',cursive;font-size:2.2rem;">15年</div>
+      <div style="font-size:0.85rem;opacity:0.85;font-weight:600;">指導実績</div>
+    </div>
+    <div>
+      <div style="font-family:'Fredoka One',cursive;font-size:2.2rem;">98%</div>
+      <div style="font-size:0.85rem;opacity:0.85;font-weight:600;">保護者満足度</div>
+    </div>
+  </div>
+</div>
+
+<!-- INFORMATION -->
+<section class="information" id="information">
+  <div class="section-inner">
+    <div class="section-tag">📢 インフォメーション</div>
+    <h2 class="section-title">お知らせ</h2>
+    <p class="section-sub">季節のイベントやキャンペーン、休講情報などをお知らせします。</p>
+    <div class="info-list fade-up">
+
+      <div class="info-item">
+        <div class="info-new-dot"></div>
+        <div class="info-date">2025.06.01</div>
+        <span class="info-badge badge-new">🆕 新着</span>
+        <div class="info-body">
+          <div class="info-title">夏の特別キャンペーン：入学金無料＋初月半額！</div>
+          <div class="info-desc">2025年6月〜7月にご入会いただいた方限定で、入学金が無料になり、さらに初月の月謝が半額になるキャンペーンを実施中です。この機会にぜひお試しください。</div>
+        </div>
+      </div>
+
+      <div class="info-item">
+        <div class="info-new-dot"></div>
+        <div class="info-date">2025.06.01</div>
+        <span class="info-badge badge-season">🌻 季節限定</span>
+        <div class="info-body">
+          <div class="info-title">【夏休み集中レッスン】7月・8月 特別プログラム受付開始</div>
+          <div class="info-desc">夏休みを英語漬けで過ごす4日間の集中レッスンを開催します！ゲームやクラフト、英語劇など楽しいアクティビティが盛りだくさん。定員8名のため、お早めにお申し込みください。</div>
+        </div>
+      </div>
+
+      <div class="info-item">
+        <div class="info-date">2025.05.15</div>
+        <span class="info-badge badge-event">🎪 イベント</span>
+        <div class="info-body">
+          <div class="info-title">スプリング発表会を開催しました！</div>
+          <div class="info-desc">5月10日（土）に恒例のスプリング発表会を開催しました。子どもたちが練習した英語スピーチや歌を発表し、大きな拍手をいただきました。次回は秋に開催予定です。</div>
+        </div>
+      </div>
+
+      <div class="info-item">
+        <div class="info-date">2025.05.01</div>
+        <span class="info-badge badge-season">🎋 季節限定</span>
+        <div class="info-body">
+          <div class="info-title">七夕イングリッシュナイト（7月7日）参加者募集中</div>
+          <div class="info-desc">七夕にちなんだ英語ワークショップを開催します。短冊に英語で願い事を書いたり、英語で七夕の物語を聞いたりと、文化と英語を一緒に楽しめるイベントです。対象：全クラス</div>
+        </div>
+      </div>
+
+      <div class="info-item">
+        <div class="info-date">2025.04.20</div>
+        <span class="info-badge badge-close">🏫 休講情報</span>
+        <div class="info-body">
+          <div class="info-title">【重要】海の日（7月21日）は全クラス休講です</div>
+          <div class="info-desc">2025年7月21日（月・祝）は海の日のため、全クラス休講となります。振替授業をご希望の方は、6月末日までにフロントまでお申し出ください。</div>
+        </div>
+      </div>
+
+      <div class="info-item">
+        <div class="info-date">2025.04.01</div>
+        <span class="info-badge badge-info">ℹ️ お知らせ</span>
+        <div class="info-body">
+          <div class="info-title">2025年度 年間行事カレンダーを公開しました</div>
+          <div class="info-desc">今年度の発表会・休講日・イベントをまとめた年間カレンダーを受付にて配布しています。ご不要の方にはデータをメールでお送りしますので、スタッフまでお声がけください。</div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- FEATURES -->
+
+<section class="features" id="features">
+  <div class="section-inner">
+    <div class="section-tag">🌟 Rainbow Kids の特徴</div>
+    <h2 class="section-title">なぜ Rainbow Kids が<br>選ばれるの？</h2>
+    <p class="section-sub">子どもの「楽しい！」を大切に。遊びながら英語が身につく独自メソッドで、全国の子どもたちが英語を大好きになっています。</p>
+    <div class="features-grid">
+      <div class="feature-card c1 fade-up">
+        <div class="feature-icon">🌍</div>
+        <h3>完全ネイティブ指導</h3>
+        <p>アメリカ・イギリス・オーストラリアなど各国出身のネイティブ講師が直接指導。本物の英語に触れながら自然に身につきます。</p>
+      </div>
+      <div class="feature-card c2 fade-up">
+        <div class="feature-icon">🎮</div>
+        <h3>ゲームで楽しく学ぶ</h3>
+        <p>歌・ゲーム・クラフトなど子どもが大好きなアクティビティを通じて学習。「勉強」という感覚なく自然に英語が身につきます。</p>
+      </div>
+      <div class="feature-card c3 fade-up">
+        <div class="feature-icon">👨‍👩‍👧</div>
+        <h3>少人数制クラス</h3>
+        <p>最大8名の少人数制。一人ひとりに目が届き、発話の機会が豊富。内気なお子さんでも安心して英語を話せます。</p>
+      </div>
+      <div class="feature-card c4 fade-up">
+        <div class="feature-icon">📈</div>
+        <h3>定期的な成長レポート</h3>
+        <p>月に一度、担当講師から詳細なフィードバックをお届け。お子さんの成長をリアルタイムで確認できます。</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CLASSES -->
+<section class="classes" id="classes">
+  <div class="section-inner">
+    <div class="section-tag">📚 クラス一覧</div>
+    <h2 class="section-title">お子さんに合った<br>クラスを選ぼう</h2>
+    <p class="section-sub">年齢と英語レベルに合わせて3つのコースをご用意。まずは無料体験レッスンでお試しください。</p>
+    <div class="classes-grid">
+      <!-- Kids -->
+      <div class="class-card fade-up">
+        <div class="class-header">
+          <div class="class-emoji">🌱</div>
+          <div>
+            <div class="class-age">3〜5歳</div>
+            <div class="class-name">スタータークラス</div>
+          </div>
+        </div>
+        <div class="class-body">
+          <p>英語のリズムと音に親しむ、はじめての英語体験。歌・絵本・遊びで楽しく英語デビュー！</p>
+          <ul class="class-features">
+            <li>英語の歌・チャンツ</li>
+            <li>絵本の読み聞かせ</li>
+            <li>フォニックス入門</li>
+            <li>体を動かす英語あそび</li>
+          </ul>
+          <div class="class-price">
+            <span class="price-num">¥8,800</span>
+            <span class="price-unit">/ 月（週1回）</span>
+          </div>
+        </div>
+      </div>
+      <!-- Junior -->
+      <div class="class-card fade-up">
+        <div class="class-header">
+          <div class="class-emoji">🚀</div>
+          <div>
+            <div class="class-age">6〜9歳</div>
+            <div class="class-name">ジュニアクラス</div>
+          </div>
+        </div>
+        <div class="class-body">
+          <p>会話・読み書きをバランスよく学ぶ。英語で「言いたいこと」が伝わる喜びを体験しよう！</p>
+          <ul class="class-features">
+            <li>日常英会話フレーズ</li>
+            <li>フォニックス・リーディング</li>
+            <li>ゲームで英語を使う</li>
+            <li>簡単なライティング</li>
+          </ul>
+          <div class="class-price">
+            <span class="price-num">¥10,800</span>
+            <span class="price-unit">/ 月（週1回）</span>
+          </div>
+        </div>
+      </div>
+      <!-- Advanced -->
+      <div class="class-card fade-up">
+        <div class="class-header">
+          <div class="class-emoji">⭐</div>
+          <div>
+            <div class="class-age">10〜12歳</div>
+            <div class="class-name">アドバンスクラス</div>
+          </div>
+        </div>
+        <div class="class-body">
+          <p>英語で考え・表現する力を伸ばす。スピーチやプレゼンにも挑戦して、英語力を高めよう！</p>
+          <ul class="class-features">
+            <li>ディスカッション・ディベート</li>
+            <li>英検対策（4・5級）</li>
+            <li>ライティング・エッセイ</li>
+            <li>プレゼンテーション</li>
+          </ul>
+          <div class="class-price">
+            <span class="price-num">¥12,800</span>
+            <span class="price-unit">/ 月（週1回）</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- TEACHERS -->
+<section class="teachers" id="teachers">
+  <div class="section-inner">
+    <div class="section-tag">👩‍🏫 講師紹介</div>
+    <h2 class="section-title">子どもが大好きな<br>ネイティブ先生たち</h2>
+    <p class="section-sub">子どもの英語指導経験豊富なネイティブ講師が揃っています。優しく・楽しく・丁寧に指導します。</p>
+    <div class="teachers-grid">
+      <div class="teacher-card fade-up">
+        <div class="teacher-avatar">👩‍🦰</div>
+        <div class="teacher-name">Emily Watson</div>
+        <div class="teacher-origin">🇺🇸 アメリカ出身</div>
+        <p>幼児教育専攻。子どもの笑顔が大好き！歌とダンスで楽しい授業が得意です。</p>
+      </div>
+      <div class="teacher-card fade-up">
+        <div class="teacher-avatar">👨‍🦱</div>
+        <div class="teacher-name">Tom Bradley</div>
+        <div class="teacher-origin">🇬🇧 イギリス出身</div>
+        <p>10年以上の指導経験。ゲームと物語で英語の楽しさを伝えます。英検指導が得意。</p>
+      </div>
+      <div class="teacher-card fade-up">
+        <div class="teacher-avatar">👩‍🦳</div>
+        <div class="teacher-name">Sarah Mitchell</div>
+        <div class="teacher-origin">🇦🇺 オーストラリア出身</div>
+        <p>音楽と英語が大好き。歌やチャンツを使ったフォニックス指導が人気です。</p>
+      </div>
+      <div class="teacher-card fade-up">
+        <div class="teacher-avatar">👨‍🦲</div>
+        <div class="teacher-name">Michael Chen</div>
+        <div class="teacher-origin">🇨🇦 カナダ出身</div>
+        <p>スポーツ好きの活発な先生。体を動かしながら英語を楽しく学べます！</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- TESTIMONIALS -->
+<section class="testimonials" id="testimonials">
+  <div class="bubbles-bg">
+    <div class="bubble" style="width:200px;height:200px;background:#00B4D8;top:-50px;right:-50px;animation-duration:8s;"></div>
+    <div class="bubble" style="width:120px;height:120px;background:#FFD60A;bottom:20px;left:5%;animation-duration:6s;"></div>
+  </div>
+  <div class="section-inner">
+    <div class="section-tag">💬 保護者の声</div>
+    <h2 class="section-title">みんなの嬉しい声</h2>
+    <p class="section-sub">Rainbow Kids English に通う子どもたちの保護者から、嬉しいお声をいただいています。</p>
+    <div class="testimonials-grid">
+      <div class="testi-card fade-up">
+        <div class="testi-stars">★★★★★</div>
+        <p class="testi-text">「英語嫌い」だった息子が、今では家でも英語の歌を歌うほど大好きに！先生が本当に優しく、楽しい授業で大変感謝しています。</p>
+        <div class="testi-author">
+          <div class="testi-avatar">👩</div>
+          <div>
+            <div class="testi-name">田中 美咲さん</div>
+            <div class="testi-role">8歳の息子のお母さん</div>
+          </div>
+        </div>
+      </div>
+      <div class="testi-card fade-up">
+        <div class="testi-stars">★★★★★</div>
+        <p class="testi-text">少人数制なので娘も緊張せず通えています。毎回「楽しかった！」と帰ってくるのが嬉しい。英検5級も合格できました！</p>
+        <div class="testi-author">
+          <div class="testi-avatar">👨</div>
+          <div>
+            <div class="testi-name">鈴木 健司さん</div>
+            <div class="testi-role">10歳の娘のお父さん</div>
+          </div>
+        </div>
+      </div>
+      <div class="testi-card fade-up">
+        <div class="testi-stars">★★★★★</div>
+        <p class="testi-text">4歳から通って2年。最初は英語を一言も話せなかったのに、今ではネイティブの先生と普通に会話できるように。成長に驚いています！</p>
+        <div class="testi-author">
+          <div class="testi-avatar">👩</div>
+          <div>
+            <div class="testi-name">山本 由香さん</div>
+            <div class="testi-role">6歳の娘のお母さん</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- SCHEDULE -->
+<section class="schedule" id="schedule">
+  <div class="section-inner">
+    <div class="section-tag">📅 スケジュール</div>
+    <h2 class="section-title">授業スケジュール</h2>
+    <p class="section-sub">週に何曜日でも通えます。ご都合に合わせてクラスをお選びください。</p>
+    <div class="schedule-table-wrap fade-up">
+      <table>
+        <thead>
+          <tr>
+            <th style="text-align:left;">クラス</th>
+            <th>月曜</th>
+            <th>水曜</th>
+            <th>土曜</th>
+            <th>日曜</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>🌱 スタータークラス (3〜5歳)</td>
+            <td><span class="tag-pill pill-sky">10:00〜</span></td>
+            <td>—</td>
+            <td><span class="tag-pill pill-sky">10:00〜</span></td>
+            <td><span class="tag-pill pill-sky">11:00〜</span></td>
+          </tr>
+          <tr>
+            <td>🚀 ジュニアクラス (6〜9歳)</td>
+            <td><span class="tag-pill pill-coral">16:00〜</span></td>
+            <td><span class="tag-pill pill-coral">16:00〜</span></td>
+            <td><span class="tag-pill pill-coral">11:30〜</span></td>
+            <td><span class="tag-pill pill-coral">13:00〜</span></td>
+          </tr>
+          <tr>
+            <td>⭐ アドバンスクラス (10〜12歳)</td>
+            <td>—</td>
+            <td><span class="tag-pill pill-green">17:30〜</span></td>
+            <td><span class="tag-pill pill-green">13:00〜</span></td>
+            <td><span class="tag-pill pill-green">14:30〜</span></td>
+          </tr>
+          <tr>
+            <td>🌙 プライベートレッスン</td>
+            <td colspan="4" style="text-align:center;"><span class="tag-pill pill-purple">ご希望の曜日・時間でご相談ください</span></td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</section>
+
+<!-- CTA / CONTACT -->
+<section class="cta-section" id="contact">
+  <div class="cta-deco"></div>
+  <div class="cta-deco"></div>
+  <div class="cta-deco"></div>
+  <div class="cta-inner">
+    <h2>🎁 まずは無料体験から！</h2>
+    <p>入学前に1回無料でレッスンをお試しいただけます。お気軽にお申し込みください。</p>
+    <div class="cta-form">
+      <input class="cta-input" type="text" placeholder="お名前（お子さまのお名前）">
+      <input class="cta-input" type="email" placeholder="メールアドレス">
+      <button class="cta-btn" onclick="alert('お申し込みありがとうございます！担当者より2営業日以内にご連絡いたします。')">無料体験を申し込む 🎉</button>
+    </div>
+    <p class="cta-note">✓ 入学金・キャンセル料 無料 ✓ セールス一切なし ✓ 2営業日以内にご連絡</p>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-logo">🌈 Rainbow Kids English</div>
+  <p class="footer-tagline">子どもの英語力を、笑顔と一緒に育てます。</p>
+  <div class="footer-links">
+    <a href="#features">特徴</a>
+    <a href="#classes">クラス</a>
+    <a href="#teachers">先生紹介</a>
+    <a href="#schedule">スケジュール</a>
+    <a href="#contact">お問い合わせ</a>
+    <a href="#">プライバシーポリシー</a>
+  </div>
+  <p class="footer-copy">© 2025 Rainbow Kids English. All rights reserved.</p>
+</footer>
+
+<script>
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach((e, i) => {
+      if (e.isIntersecting) {
+        setTimeout(() => e.target.classList.add('visible'), i * 80);
+      }
+    });
+  }, { threshold: 0.12 });
+  document.querySelectorAll('.fade-up').forEach(el => observer.observe(el));
+</script>
+</body>
+</html>
